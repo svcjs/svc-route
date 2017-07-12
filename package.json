@@ -1,0 +1,53 @@
+{
+  "name": "svc-route",
+  "version": "0.0.3",
+  "description": "a route freamwork",
+  "main": "dist/svc-route.cjs.js",
+  "module": "dist/svc-route.es.js",
+  "jsnext:main": "dist/svc-route.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svcjs/svc-route.git"
+  },
+  "author": {
+    "name": "Star",
+    "email": "star3s@126.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/svcjs/svc-route/issues"
+  },
+  "homepage": "https://github.com/svcjs/svc-route#readme",
+  "scripts": {
+    "lint": "standard --fix rollup.config.js test/** src/**",
+    "test": "nyc ava test/*.js",
+    "test-watch": "watch -p '+(test|src)/*.js' -c 'ava test/*.js'",
+    "build": "rm -rf dist && rollup -c && uglifyjs ./dist/svc-route.js -o ./dist/svc-route.min.js -c warnings=false -m",
+    "test-build": "chmod +x test.sh && ./test.sh dist/svc-route.cjs && ./test.sh dist/svc-route.es && ./test.sh dist/svc-route && ./test.sh dist/svc-route.min && ./test.sh",
+    "build-all": "npm run lint && npm run test && npm run build && npm run test-build"
+  },
+  "ava": {
+    "require": "babel-register",
+    "babel": "inherit"
+  },
+  "babel": {
+    "plugins": [
+      "transform-es2015-modules-commonjs"
+    ]
+  },
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "nyc": "^10.3.2",
+    "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "standard": "^10.0.2",
+    "uglify-js": "^3.0.11",
+    "watch-cli": "^0.2.1"
+  }
+}
