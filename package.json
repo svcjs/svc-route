@@ -1,6 +1,6 @@
 {
   "name": "svc-route",
-  "version": "0.0.3",
+  "version": "0.1.1",
   "description": "a route freamwork",
   "main": "dist/svc-route.cjs.js",
   "module": "dist/svc-route.es.js",

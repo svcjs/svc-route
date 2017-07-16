@@ -9,7 +9,7 @@ export default {
     { dest: 'dist/svc-route.cjs.js', format: 'cjs' },
     { dest: 'dist/svc-route.es.js', format: 'es' }
   ],
-  moduleName: 'svc-route',
+  moduleName: 'svcRoute',
   plugins: [
     babel({
       babelrc: false,

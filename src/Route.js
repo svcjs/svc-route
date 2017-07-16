@@ -114,6 +114,9 @@ export default class Route {
         this._routeHistories = this._routeHistories.slice(0, this._routeHistoryPos + 1)
       }
       this._routeHistories.push(paths)
+      if (this._routeHistories.length > 10) {
+        this._routeHistories = this._routeHistories.slice(this._routeHistories.length - 11)
+      }
       this._routeHistoryPos = this._routeHistories.length - 1
     }
 
