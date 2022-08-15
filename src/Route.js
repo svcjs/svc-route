@@ -3,6 +3,7 @@ export default class Route {
     this.routeUrl = ''
     this._routeHistoryPos = -1
     this._routeHistories = []
+    this.paths = []
     this._binds = {}
     this._spaceChars = ['/', '#', '!', '`', '~', '@', '%', '^', '*', ';', '\\', ' ']
   }
@@ -62,7 +63,7 @@ export default class Route {
         }
 
         url = decodeURIComponent(url)
-        path = {args: {}}
+        path = { args: {} }
         let argsPos
         if ((argsPos = url.indexOf('?')) !== -1) {
           path.name = url.substr(0, argsPos)
@@ -124,7 +125,9 @@ export default class Route {
     this.remakeRouteUrl()
     if (this.routeUrl === oldUrl) {
       // 相同的路由不触发事件
-      return
+      return new Promise(function (resolve) {
+        resolve(paths)
+      })
     }
 
     // // 重新计算 pathName、url
@@ -189,6 +192,7 @@ export default class Route {
   // 生成URL
   remakeRouteUrl () {
     let paths = this._routeHistories[this._routeHistoryPos]
+    this.paths = paths
     let newUrls = []
     let names = []
     for (let path of paths) {
@@ -199,7 +203,7 @@ export default class Route {
       newUrls.push(path.url)
       paths.last = path
     }
-    if (!paths.last) paths.last = {name: '', args: '', pathName: '', url: ''}
+    if (!paths.last) paths.last = { name: '', args: '', pathName: '', url: '' }
 
     // 寻找一个没出现过的字符作为间隔符
     let space = '/'
